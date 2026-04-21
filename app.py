@@ -12,7 +12,8 @@ database_url = os.environ.get('DATABASE_URL', 'sqlite:///local.db')
 # 2. Fix the Aiven URL (Aiven gives 'mysql://', but SQLAlchemy needs 'mysql+pymysql://')
 if database_url.startswith("mysql://"):
     database_url = database_url.replace("mysql://", "mysql+pymysql://", 1)
-    database_url = database_url.replace("ssl-mode", "ssl_mode")
+    if "?" in database_url:
+        database_url = database_url.split("?")[0]
 
 app.config['SQLALCHEMY_DATABASE_URI'] = database_url
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
