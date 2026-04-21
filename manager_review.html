@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card shadow-sm">
+    <div class="card-header bg-white py-3">
+        <h5 class="mb-0">User Applications for Review</h5>
+    </div>
+    <div class="table-responsive">
+        <table class="table align-middle">
+            <thead>
+                <tr>
+                    <th>User</th>
+                    <th>Destination</th>
+                    <th>Reason</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for app in apps %}
+                <tr>
+                    <td>{{ app.user.user_name }}</td>
+                    <td>{{ app.destination }}</td>
+                    <td>{{ app.reason }}</td>
+                    <td>
+                        <div class="d-flex gap-2">
+                            <form method="POST" action="/manager/update/{{ app.id }}">
+                                <button name="decision" value="Approved" class="btn btn-sm btn-success">Approve</button>
+                                <button name="decision" value="Rejected" class="btn btn-sm btn-danger">Reject</button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

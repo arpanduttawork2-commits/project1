@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-5 mt-5">
+        <div class="card shadow border-0">
+            <div class="card-body p-5 text-center">
+                <h3 class="fw-bold mb-4">Travel Portal Login</h3>
+                
+                <form method="POST" action="/">
+                    <div class="form-floating mb-4">
+                        <input type="text" class="form-control" name="username" id="username" placeholder="Enter Username" required>
+                        <label for="username">Username</label>
+                    </div>
+
+                    <div class="d-grid gap-3">
+                        <button type="submit" name="role" value="user" class="btn btn-primary btn-lg">
+                            Login as User
+                        </button>
+                        <button type="submit" name="role" value="manager" class="btn btn-dark btn-lg">
+                            Login as Manager
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
