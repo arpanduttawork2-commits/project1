@@ -8,9 +8,14 @@
                 <h3 class="fw-bold mb-4">Travel Portal Login</h3>
                 
                 <form method="POST" action="/">
-                    <div class="form-floating mb-4">
+                    <div class="form-floating mb-3">
                         <input type="text" class="form-control" name="username" id="username" placeholder="Enter Username" required>
                         <label for="username">Username</label>
+                    </div>
+
+                    <div class="form-floating mb-4">
+                        <input type="password" class="form-control" name="password" id="password" placeholder="Enter Password" required>
+                        <label for="password">Password</label>
                     </div>
 
                     <div class="d-grid gap-3">
@@ -22,6 +27,10 @@
                         </button>
                     </div>
                 </form>
+                
+                {% if error %}
+                    <p class="text-danger mt-3">{{ error }}</p>
+                {% endif %}
             </div>
         </div>
     </div>
