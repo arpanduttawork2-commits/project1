@@ -4,3 +4,4 @@ Flask-Login
 Flask-WTF
 PyMySQL
 gunicorn
+cryptography
