@@ -18,7 +18,12 @@ if database_url.startswith("mysql://"):
 app.config['SQLALCHEMY_DATABASE_URI'] = database_url
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = 'dev-key-123' # You can change this to a secure string later
-
+if "mysql" in database_url:
+    app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {
+        'connect_args': {
+            'ssl': {}
+        }
+    }
 # Initialize the database with the app
 db.init_app(app)
 
