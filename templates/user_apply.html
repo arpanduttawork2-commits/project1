@@ -3,21 +3,34 @@
 {% block content %}
 <div class="row justify-content-center">
     <div class="col-md-6">
-        <div class="card shadow-sm">
-            <div class="card-header bg-white py-3">
+        <div class="card shadow-sm border-0">
+            <div class="card-header bg-primary text-white py-3">
                 <h5 class="mb-0">New Travel Request</h5>
             </div>
-            <div class="card-body">
+            <div class="card-body p-4">
                 <form method="POST" action="/user/apply">
-                    <div class="mb-3">
-                        <label class="form-label">Destination</label>
-                        <input type="text" name="destination" class="form-control" required>
+                    
+                    <div class="mb-4">
+                        <label class="form-label fw-bold">Destination</label>
+                        <select name="destination" class="form-select form-select-lg" required>
+                            <option value="" selected disabled>Choose a city...</option>
+                            <option value="Mumbai">Mumbai</option>
+                            <option value="Hyderabad">Hyderabad</option>
+                            <option value="Bangalore">Bangalore</option>
+                            <option value="Delhi">Delhi</option>
+                            <option value="Chennai">Chennai</option>
+                        </select>
+                        <div class="form-text">Select one of our corporate hub locations.</div>
                     </div>
-                    <div class="mb-3">
-                        <label class="form-label">Reason</label>
-                        <textarea name="reason" class="form-control" rows="3" required></textarea>
+
+                    <div class="mb-4">
+                        <label class="form-label fw-bold">Reason for Travel</label>
+                        <textarea name="reason" class="form-control" rows="4" placeholder="e.g. Quarterly business review with the client" required></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary w-100">Submit Application</button>
+
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary btn-lg">Submit Application</button>
+                    </div>
                 </form>
             </div>
         </div>
