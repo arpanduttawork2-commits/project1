@@ -1,36 +1,26 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="row justify-content-center">
-    <div class="col-md-5 mt-5">
-        <div class="card shadow border-0">
-            <div class="card-body p-5 text-center">
-                <h3 class="fw-bold mb-4">Travel Portal Login</h3>
-                
-                <form method="POST" action="/">
-                    <div class="form-floating mb-3">
-                        <input type="text" class="form-control" name="username" id="username" placeholder="Enter Username" required>
-                        <label for="username">Username</label>
+<div class="row justify-content-center mt-5">
+    <div class="col-md-5">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white text-center py-3">
+                <h4 class="mb-0">System Login</h4>
+            </div>
+            <div class="card-body p-4">
+                <form method="POST" action="{{ url_for('login') }}">
+                    <div class="mb-3">
+                        <label for="user_id" class="form-label">Login ID</label>
+                        <input type="text" class="form-control" id="user_id" name="user_id" placeholder="e.g., user123 or tadmin123" required>
                     </div>
-
-                    <div class="form-floating mb-4">
-                        <input type="password" class="form-control" name="password" id="password" placeholder="Enter Password" required>
-                        <label for="password">Password</label>
+                    <div class="mb-4">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="password" name="password" required>
                     </div>
-
-                    <div class="d-grid gap-3">
-                        <button type="submit" name="role" value="user" class="btn btn-primary btn-lg">
-                            Login as User
-                        </button>
-                        <button type="submit" name="role" value="manager" class="btn btn-dark btn-lg">
-                            Login as Manager
-                        </button>
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary btn-lg">Secure Login</button>
                     </div>
                 </form>
-                
-                {% if error %}
-                    <p class="text-danger mt-3">{{ error }}</p>
-                {% endif %}
             </div>
         </div>
     </div>

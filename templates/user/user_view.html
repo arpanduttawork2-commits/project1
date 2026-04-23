@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row mb-4 align-items-center">
+    <div class="col-md-8">
+        <h2>My Travel History</h2>
+    </div>
+    <div class="col-md-4 text-end">
+        <a href="{{ url_for('user_home') }}" class="btn btn-outline-secondary">← Back to Menu</a>
+    </div>
+</div>
+
+<div class="card shadow-sm">
+    <div class="card-body">
+        <table class="table table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>Destination</th>
+                    <th>Dates</th>
+                    <th>Manager Status</th>
+                    <th>Admin Status</th>
+                    <th>Tickets</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for app in applications %}
+                <tr>
+                    <td><strong>{{ app.destination }}</strong></td>
+                    <td>{{ app.start_date.strftime('%b %d, %Y') }} to {{ app.end_date.strftime('%b %d, %Y') }}</td>
+                    
+                    <td>
+                        {% if app.manager_status == 'Approved' %} <span class="badge bg-success">Approved</span>
+                        {% elif app.manager_status == 'Rejected' %} <span class="badge bg-danger">Rejected</span>
+                        {% else %} <span class="badge bg-warning text-dark">Pending</span> {% endif %}
+                    </td>
+
+                    <td>
+                        {% if app.admin_status == 'Approved' %} <span class="badge bg-success">Approved</span>
+                        {% elif app.admin_status == 'Rejected' %} <span class="badge bg-danger">Rejected</span>
+                        {% else %} <span class="badge bg-warning text-dark">Pending</span> {% endif %}
+                    </td>
+
+                    <td>
+                        {% if app.admin_status == 'Approved' %}
+                            <div class="d-flex gap-2">
+                                <a href="{{ url_for('download_ticket', app_id=app.id, direction='to') }}" 
+                                   class="btn btn-sm btn-outline-success" target="_blank">
+                                   ⬇️ To Destination
+                                </a>
+                                <a href="{{ url_for('download_ticket', app_id=app.id, direction='return') }}" 
+                                   class="btn btn-sm btn-outline-success" target="_blank">
+                                   ⬇️ Return
+                                </a>
+                            </div>
+                        {% else %}
+                            <span class="text-muted">N/A</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="5" class="text-center text-muted py-4">You have no travel history yet.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

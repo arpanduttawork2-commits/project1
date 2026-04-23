@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row justify-content-center mt-5">
+    <div class="col-md-8">
+        <div class="card shadow-lg border-0">
+            <div class="card-header bg-dark text-white py-3">
+                <h4 class="mb-0">Manager Approval Required</h4>
+            </div>
+            
+            <div class="card-body p-5">
+                {% if app.manager_status != 'Pending' %}
+                    <div class="alert alert-info text-center">
+                        <h5>This request has already been processed.</h5>
+                        <p class="mb-0">Current Status: <strong>{{ app.manager_status }}</strong></p>
+                    </div>
+                {% else %}
+                    <h5 class="mb-4">Travel Request Details:</h5>
+                    
+                    <table class="table table-bordered mb-4">
+                        <tbody>
+                            <tr>
+                                <th class="bg-light" style="width: 30%;">Employee Name</th>
+                                <td>{{ app.user.user_name }}</td>
+                            </tr>
+                            <tr>
+                                <th class="bg-light">Base Location</th>
+                                <td>{{ app.user.base_location }}</td>
+                            </tr>
+                            <tr>
+                                <th class="bg-light">Destination</th>
+                                <td><strong>{{ app.destination }}</strong></td>
+                            </tr>
+                            <tr>
+                                <th class="bg-light">Dates</th>
+                                <td>{{ app.start_date.strftime('%B %d, %Y') }} - {{ app.end_date.strftime('%B %d, %Y') }}</td>
+                            </tr>
+                            <tr>
+                                <th class="bg-light">Business Reason</th>
+                                <td>{{ app.reason }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="alert alert-warning mb-4">
+                        <strong>Note:</strong> Approving this request will automatically forward it to the Travel Admin team for ticket booking.
+                    </div>
+
+                    <form method="POST" action="{{ url_for('manager_decision', app_id=app.id) }}" class="d-flex justify-content-center gap-4">
+                        <button type="submit" name="action" value="reject" class="btn btn-outline-danger btn-lg px-5">Reject Request</button>
+                        <button type="submit" name="action" value="approve" class="btn btn-success btn-lg px-5">Approve Travel</button>
+                    </form>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

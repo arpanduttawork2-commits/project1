@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row justify-content-center mt-4">
+    <div class="col-md-8">
+        <div class="card shadow-sm border-primary">
+            <div class="card-header bg-primary text-white py-3">
+                <h4 class="mb-0">Upload Travel Tickets</h4>
+            </div>
+            
+            <div class="card-body p-4">
+                <div class="bg-light p-3 rounded mb-4">
+                    <h5>Passenger: {{ app.user.user_name }}</h5>
+                    <p class="mb-1"><strong>Route:</strong> {{ app.user.base_location }} ➔ {{ app.destination }}</p>
+                    <p class="mb-0"><strong>Dates:</strong> {{ app.start_date.strftime('%B %d, %Y') }} to {{ app.end_date.strftime('%B %d, %Y') }}</p>
+                </div>
+
+                <form method="POST" action="{{ url_for('upload_tickets', app_id=app.id) }}" enctype="multipart/form-data">
+                    
+                    <div class="mb-3">
+                        <label for="ticket_to" class="form-label fw-bold">Outgoing Ticket (To {{ app.destination }})</label>
+                        <input class="form-control" type="file" id="ticket_to" name="ticket_to" accept=".pdf,.png,.jpg" required>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="ticket_from" class="form-label fw-bold">Return Ticket (To {{ app.user.base_location }})</label>
+                        <input class="form-control" type="file" id="ticket_from" name="ticket_from" accept=".pdf,.png,.jpg" required>
+                    </div>
+
+                    <div class="d-flex justify-content-between mt-5">
+                        <a href="{{ url_for('admin_home') }}" class="btn btn-outline-secondary px-4">Cancel</a>
+                        <button type="submit" class="btn btn-success px-4">Submit & Approve</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

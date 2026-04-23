@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-8">
+        <h2>Travel Admin Dashboard</h2>
+        <p class="text-muted">Requests pending ticket booking.</p>
+    </div>
+</div>
+
+<div class="card shadow-sm border-primary">
+    <div class="card-header bg-primary text-white">
+        <h5 class="mb-0">Action Required: Upload Tickets</h5>
+    </div>
+    <div class="card-body">
+        <table class="table table-hover align-middle">
+            <thead class="table-light">
+                <tr>
+                    <th>Employee</th>
+                    <th>Base -> Destination</th>
+                    <th>Dates</th>
+                    <th>Reason</th>
+                    <th class="text-end">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for app in applications %}
+                <tr>
+                    <td><strong>{{ app.user.user_name }}</strong></td>
+                    <td>{{ app.user.base_location }} ➔ <strong>{{ app.destination }}</strong></td>
+                    <td>{{ app.start_date.strftime('%b %d') }} to {{ app.end_date.strftime('%b %d') }}</td>
+                    <td><small class="text-muted">{{ app.reason }}</small></td>
+                    
+                    <td class="text-end">
+                        <a href="#" class="btn btn-primary btn-sm px-3">Upload Tickets</a>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="5" class="text-center text-muted py-5">
+                        <h4>🎉 All caught up!</h4>
+                        <p>No approved travel requests are waiting for tickets.</p>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
