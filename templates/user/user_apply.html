@@ -1,60 +1,51 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="row mb-4 align-items-center">
+<div class="row justify-content-center">
     <div class="col-md-8">
-        <h2>My Travel History</h2>
-    </div>
-    <div class="col-md-4 text-end">
-        <a href="{{ url_for('user_home') }}" class="btn btn-outline-secondary">← Back to Menu</a>
-    </div>
-</div>
-
-<div class="card shadow-sm">
-    <div class="card-body">
-        <table class="table table-hover">
-            <thead class="table-dark">
-                <tr>
-                    <th>Destination</th>
-                    <th>Dates</th>
-                    <th>Manager Status</th>
-                    <th>Admin Status</th>
-                    <th>Tickets</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for app in applications %}
-                <tr>
-                    <td><strong>{{ app.destination }}</strong></td>
-                    <td>{{ app.start_date.strftime('%b %d, %Y') }} to {{ app.end_date.strftime('%b %d, %Y') }}</td>
+        <div class="card shadow-sm mt-4">
+            <div class="card-header bg-dark text-white">
+                <h4 class="mb-0">Request Enterprise Travel</h4>
+            </div>
+            <div class="card-body p-4">
+                <form method="POST" action="{{ url_for('user_apply') }}">
                     
-                    <td>
-                        {% if app.manager_status == 'Approved' %} <span class="badge bg-success">Approved</span>
-                        {% elif app.manager_status == 'Rejected' %} <span class="badge bg-danger">Rejected</span>
-                        {% else %} <span class="badge bg-warning text-dark">Pending</span> {% endif %}
-                    </td>
+                    <div class="mb-3">
+                        <label for="destination" class="form-label">Destination Office</label>
+                        <select class="form-select" id="destination" name="destination" required>
+                            <option value="" selected disabled>Select a city...</option>
+                            <option value="Mumbai">Mumbai</option>
+                            <option value="Delhi">Delhi</option>
+                            <option value="Bangalore">Bangalore</option>
+                            <option value="Hyderabad">Hyderabad</option>
+                            <option value="Chennai">Chennai</option>
+                        </select>
+                    </div>
 
-                    <td>
-                        {% if app.admin_status == 'Approved' %} <span class="badge bg-success">Approved</span>
-                        {% elif app.admin_status == 'Rejected' %} <span class="badge bg-danger">Rejected</span>
-                        {% else %} <span class="badge bg-warning text-dark">Pending</span> {% endif %}
-                    </td>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="start_date" class="form-label">Start Date</label>
+                            <input type="date" class="form-control" id="start_date" name="start_date" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="end_date" class="form-label">End Date</label>
+                            <input type="date" class="form-control" id="end_date" name="end_date" required>
+                        </div>
+                    </div>
 
-                    <td>
-                        {% if app.admin_status == 'Approved' %}
-                            <button class="btn btn-sm btn-outline-success">Download</button>
-                        {% else %}
-                            <span class="text-muted">N/A</span>
-                        {% endif %}
-                    </td>
-                </tr>
-                {% else %}
-                <tr>
-                    <td colspan="5" class="text-center text-muted py-4">You have no travel history yet.</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+                    <div class="mb-4">
+                        <label for="reason" class="form-label">Business Justification</label>
+                        <textarea class="form-control" id="reason" name="reason" rows="3" placeholder="Why is this travel required?" required></textarea>
+                    </div>
+
+                    <div class="d-flex justify-content-between">
+                        <a href="{{ url_for('user_home') }}" class="btn btn-outline-secondary">Cancel</a>
+                        <button type="submit" class="btn btn-primary px-4">Submit Request</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}
