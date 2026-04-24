@@ -39,7 +39,7 @@ class Application(db.Model):
     manager_status = db.Column(db.String(20), default='Pending')
     admin_status = db.Column(db.String(20), default='Pending')
     
-    ticket_to_blob = db.Column(db.LargeBinary, nullable=True)
-    ticket_from_blob = db.Column(db.LargeBinary, nullable=True)
+    ticket_to_blob = ticket_to_blob = db.Column(db.LargeBinary(length=16777215), nullable=True)
+    ticket_from_blob = ticket_from_blob = db.Column(db.LargeBinary(length=16777215), nullable=True)
     
     user_id = db.Column(db.String(50), db.ForeignKey('users.id'), nullable=False) # <-- Changed to String
