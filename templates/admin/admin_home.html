@@ -32,7 +32,7 @@
                     <td><small class="text-muted">{{ app.reason }}</small></td>
                     
                     <td class="text-end">
-                        <a href="#" class="btn btn-primary btn-sm px-3">Upload Tickets</a>
+                        <a href="{{ url_for('upload_tickets', app_id=app.id) }}" class="btn btn-primary btn-sm px-3">Upload Tickets</a>
                     </td>
                 </tr>
                 {% else %}
