@@ -173,7 +173,7 @@ Please review this request and make a decision by clicking the secure link below
 Thank you,
 Enterprise Travel System
 """
-            mail.send(msg)
+           # mail.send(msg)
             flash("Travel request submitted successfully! Your manager has been emailed.", "success")
             
         except Exception as e:
