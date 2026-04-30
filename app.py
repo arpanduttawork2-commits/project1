@@ -23,13 +23,12 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db.init_app(app)
 
-# --- FLASK-MAIL SETUP (Gmail Configuration) ---
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
-app.config['MAIL_PORT'] = 587
-app.config['MAIL_USE_TLS'] = True
-app.config['MAIL_USE_SSL'] = False
-app.config['MAIL_USERNAME'] = os.environ.get('MAIL_USERNAME') # systemadmin114@gmail.com
-app.config['MAIL_PASSWORD'] = os.environ.get('MAIL_PASSWORD') # Your 16-char App Password
+app.config['MAIL_PORT'] = 465                 # <-- CHANGE THIS TO 465
+app.config['MAIL_USE_TLS'] = False            # <-- CHANGE THIS TO False
+app.config['MAIL_USE_SSL'] = True             # <-- CHANGE THIS TO True
+app.config['MAIL_USERNAME'] = os.environ.get('MAIL_USERNAME') 
+app.config['MAIL_PASSWORD'] = os.environ.get('MAIL_PASSWORD') 
 app.config['MAIL_DEFAULT_SENDER'] = os.environ.get('MAIL_USERNAME')
 
 mail = Mail(app)
